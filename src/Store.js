@@ -5,16 +5,13 @@ import './App.css';
 
 const Store = () => {
 
-    
-
     const[products, setProducts] = useState([])
     const[id, setId] = useState('')
-    const[username, setUsername] = useState('')
     const[authToken, setAuthToken] = useState('')
     
-
     useEffect(() => {
         getProducts()
+        getUser()
     }, [])
 
 
@@ -23,9 +20,17 @@ const Store = () => {
         const data = await axios.get('http://127.0.0.1:8000/api/')
         console.log(data.data)
         setProducts(data.data.Item)
-        setId(data.data.User[0].id)
-        setUsername(data.data.User[0].username)
-        console.log(data.data.User[0].id)
+    }
+
+    const getUser = async() => {
+        const data = await axios.get('http://127.0.0.1:8000/api/users/',{
+            headers:{
+                'Authorization': `Token 7e9826b7cb7f9e152d7cd35c5179f0ae3de257a0` // Add authorization token generated from login page, currently using modheader
+            }
+        })
+        console.log(data.data[0].id)
+        setId(data.data[0].id)
+        
     }
 
     function getCookie(name) {

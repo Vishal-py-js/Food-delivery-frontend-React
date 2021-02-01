@@ -35,9 +35,9 @@ function Cart() {
 
     const getCartItems = async() => {
         const data = await axios.get('http://127.0.0.1:8000/api/order-items/',{
-            headers:{
-                // 'Authorization': `Token 95f67b1c18ee24e77231a7c3a60ec586f866219f` Add authorization token generated from login page, currently using modheader
-            }
+            // headers:{
+            //     'Authorization': `Token 7e9826b7cb7f9e152d7cd35c5179f0ae3de257a0` // Add authorization token generated from login page, currently using modheader
+            // }
         })
         console.log(data.data)
         await setCart(data.data)
