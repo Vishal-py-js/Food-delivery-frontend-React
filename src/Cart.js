@@ -9,6 +9,7 @@ function Cart() {
 
     const[cart, setCart] = useState([])
     const[total, setTotal] = useState('')
+    const[userId, setUserId] = useState('')
 
     useEffect(() => {
         getCartItems()
@@ -33,9 +34,13 @@ function Cart() {
     let csrftoken = getCookie('csrftoken')
 
     const getCartItems = async() => {
-        const data = await axios.get('http://127.0.0.1:8000/api/cart/')
-        console.log(data.data.OrderItem)
-        await setCart(data.data.OrderItem)
+        const data = await axios.get('http://127.0.0.1:8000/api/order-items/',{
+            headers:{
+                // 'Authorization': `Token 95f67b1c18ee24e77231a7c3a60ec586f866219f` Add authorization token generated from login page, currently using modheader
+            }
+        })
+        console.log(data.data)
+        await setCart(data.data)
     }
 
 
