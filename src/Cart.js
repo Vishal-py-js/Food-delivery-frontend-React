@@ -9,35 +9,18 @@ function Cart() {
 
     const[cart, setCart] = useState([])
     const[total, setTotal] = useState('')
-    const[userId, setUserId] = useState('')
+    
 
     useEffect(() => {
         getCartItems()
     }, [])
 
-    function getCookie(name) {
-        var cookieValue = null;
-        if (document.cookie && document.cookie !== '') {
-            var cookies = document.cookie.split(';');
-            for (var i = 0; i < cookies.length; i++) {
-                var cookie = cookies[i].trim();
-                // Does this cookie string begin with the name we want?
-                if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                    break;
-                }
-            }
-        }
-        return cookieValue;
-      }
-
-    let csrftoken = getCookie('csrftoken')
 
     const getCartItems = async() => {
         const data = await axios.get('http://127.0.0.1:8000/api/order-items/',{
-            // headers:{
-            //     'Authorization': `Token 7e9826b7cb7f9e152d7cd35c5179f0ae3de257a0` // Add authorization token generated from login page, currently using modheader
-            // }
+            headers:{
+                'Authorization': `Token ${localStorage.getItem('Token')}`
+            }
         })
         console.log(data.data)
         await setCart(data.data)
@@ -45,15 +28,27 @@ function Cart() {
 
 
     const increaseItem = async(cartitem) => {
-        await axios.put(`http://127.0.0.1:8000/api/cart/${cartitem.id}/`, {quantity: cartitem.quantity+1, 'X-CSRFToken':csrftoken})
+        await axios.put(`http://127.0.0.1:8000/api/cart/${cartitem.id}/`, {quantity: cartitem.quantity+1}, {
+            headers:{
+                'Authorization': `Token ${localStorage.getItem('Token')}`
+            }
+        })
         window.location.reload()
     }
 
     const decreaseItem = async(cartitem) => {
         if(cartitem.quantity == 1){
-            await axios.delete(`http://127.0.0.1:8000/api/cart/${cartitem.id}/`, {'X-CSRFToken':csrftoken})
+            await axios.delete(`http://127.0.0.1:8000/api/cart/${cartitem.id}/`, {
+                headers:{
+                    'Authorization': `Token ${localStorage.getItem('Token')}`
+                }
+            })
         }else {
-            await axios.put(`http://127.0.0.1:8000/api/cart/${cartitem.id}/`, {quantity: cartitem.quantity-1, 'X-CSRFToken':csrftoken})
+            await axios.put(`http://127.0.0.1:8000/api/cart/${cartitem.id}/`, {quantity: cartitem.quantity-1}, {
+                headers:{
+                    'Authorization': `Token ${localStorage.getItem('Token')}`
+                }
+            })
         }
         window.location.reload()
     }

@@ -8,7 +8,6 @@ import axios from 'axios'
 export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [token, setToken] = useState("");
 
   function validateForm() {
     return username.length > 0 && password.length > 0;
@@ -21,13 +20,11 @@ export default function Login() {
         password: password
     })
     .then(res =>{
-        setToken(res.data.token)
-        console.log(res.data.token)
+        console.log(res.data)
+        const tokenauth = res.data.token
+        localStorage.setItem('Token', tokenauth)
         
     })
-    .then(
-       console.log(token) 
-    )
   }
 
   return (
