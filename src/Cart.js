@@ -9,7 +9,7 @@ function Cart() {
 
     const[cart, setCart] = useState([])
     const[total, setTotal] = useState('')
-    
+
 
     useEffect(() => {
         getCartItems()
@@ -23,7 +23,17 @@ function Cart() {
             }
         })
         console.log(data.data)
+        document.getElementById("cart-total").innerHTML = data.data.length
+        localStorage.setItem('item-count', data.data.length)
         await setCart(data.data)
+        // let innhtml = document.getElementById('user-status')
+        // if (localStorage.getItem('Token')) {
+        //     innhtml.innerHTML = "Logout"
+        //     document.getElementById('user-detail').innerHTML += `<li class="nav-item active"><a class="nav-link" href="/"> <span class="sr-only">(current)</span></a></li>` 
+
+        // } else {
+        //     innhtml.innerHTML = "LogIn"
+        // } 
     }
 
 

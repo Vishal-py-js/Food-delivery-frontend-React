@@ -14,7 +14,6 @@ const Store = () => {
         getUser()
     }, [])
 
-
     const getProducts = async() => {
         
         const data = await axios.get('http://127.0.0.1:8000/api/')
@@ -30,8 +29,18 @@ const Store = () => {
             }
         })
         console.log(data.data[0].id)
+        console.log(data.data[0].username)
+        let user = data.data[0].username
         setId(data.data[0].id)
-        
+        document.getElementById('cart-total').innerHTML = localStorage.getItem('item-count')
+        let innhtml = document.getElementById('user-status')
+        if (localStorage.getItem('Token')) {
+            innhtml.innerHTML = "Logout"
+            document.getElementById('user-detail').innerHTML += `<li class="nav-item active"><a class="nav-link" href="/">${user} <span class="sr-only">(current)</span></a></li>` 
+
+        } else {
+            innhtml.innerHTML = "LogIn"
+        } 
     }
 
 
@@ -43,6 +52,7 @@ const Store = () => {
             }
         }
             )
+        window.location.reload()
     }
 
     return (
