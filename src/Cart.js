@@ -3,6 +3,7 @@ import arrowup from './arrow-up.png'
 import arrowdown from './arrow-down.png'
 import axios from 'axios'
 import './App.css';
+import {BaseURL} from './Constants'
 
 
 function Cart() {
@@ -17,7 +18,7 @@ function Cart() {
 
 
     const getCartItems = async() => {
-        const data = await axios.get('http://127.0.0.1:8000/api/order-items/',{
+        const data = await axios.get(`${BaseURL}order-items/`,{
             headers:{
                 'Authorization': `Token ${localStorage.getItem('Token')}`
             }
@@ -26,19 +27,19 @@ function Cart() {
         document.getElementById("cart-total").innerHTML = data.data.length
         localStorage.setItem('item-count', data.data.length)
         await setCart(data.data)
-        // let innhtml = document.getElementById('user-status')
-        // if (localStorage.getItem('Token')) {
-        //     innhtml.innerHTML = "Logout"
-        //     document.getElementById('user-detail').innerHTML += `<li class="nav-item active"><a class="nav-link" href="/"> <span class="sr-only">(current)</span></a></li>` 
+        let innhtml = document.getElementById('user-status')
+        if (localStorage.getItem('Token')) {
+            innhtml.innerHTML = "Logout"
+            // document.getElementById('user-detail').innerHTML += `<li class="nav-item active"><a class="nav-link" href="/">${user} <span class="sr-only">(current)</span></a></li>` 
 
-        // } else {
-        //     innhtml.innerHTML = "LogIn"
-        // } 
+        } else {
+            innhtml.innerHTML = "LogIn"
+        }  
     }
 
 
     const increaseItem = async(cartitem) => {
-        await axios.put(`http://127.0.0.1:8000/api/cart/${cartitem.id}/`, {quantity: cartitem.quantity+1}, {
+        await axios.put(`${BaseURL}cart/${cartitem.id}/`, {quantity: cartitem.quantity+1}, {
             headers:{
                 'Authorization': `Token ${localStorage.getItem('Token')}`
             }
@@ -48,13 +49,13 @@ function Cart() {
 
     const decreaseItem = async(cartitem) => {
         if(cartitem.quantity == 1){
-            await axios.delete(`http://127.0.0.1:8000/api/cart/${cartitem.id}/`, {
+            await axios.delete(`${BaseURL}cart/${cartitem.id}/`, {
                 headers:{
                     'Authorization': `Token ${localStorage.getItem('Token')}`
                 }
             })
         }else {
-            await axios.put(`http://127.0.0.1:8000/api/cart/${cartitem.id}/`, {quantity: cartitem.quantity-1}, {
+            await axios.put(`${BaseURL}cart/${cartitem.id}/`, {quantity: cartitem.quantity-1}, {
                 headers:{
                     'Authorization': `Token ${localStorage.getItem('Token')}`
                 }

@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import './App.css';
+import {BaseURL} from './Constants'
 
 
 const Store = () => {
@@ -16,14 +17,14 @@ const Store = () => {
 
     const getProducts = async() => {
         
-        const data = await axios.get('http://127.0.0.1:8000/api/')
+        const data = await axios.get(BaseURL)
         console.log(data.data)
         setProducts(data.data.Item)
     }
 
     const getUser = async() => {
         
-        const data = await axios.get('http://127.0.0.1:8000/api/users/',{
+        const data = await axios.get(`${BaseURL}users/`,{
             headers:{
                 'Authorization': `Token ${localStorage.getItem('Token')}`
             }
@@ -32,20 +33,18 @@ const Store = () => {
         console.log(data.data[0].username)
         let user = data.data[0].username
         setId(data.data[0].id)
+
         document.getElementById('cart-total').innerHTML = localStorage.getItem('item-count')
         let innhtml = document.getElementById('user-status')
         if (localStorage.getItem('Token')) {
             innhtml.innerHTML = "Logout"
-            document.getElementById('user-detail').innerHTML += `<li class="nav-item active"><a class="nav-link" href="/">${user} <span class="sr-only">(current)</span></a></li>` 
-
-        } else {
-            innhtml.innerHTML = "LogIn"
+            document.getElementById('user-detail').innerHTML += `<li class="nav-item active"><a class="nav-link" href="/">Welcome ${user} <span class="sr-only">(current)</span></a></li>` 
         } 
     }
 
 
     const addToCart = async(slug, id) => {
-        await axios.post('http://127.0.0.1:8000/api/add-to-cart/', {slug, id},
+        await axios.post(`${BaseURL}add-to-cart/`, {slug, id},
         {
             headers:{
                 'Authorization': `Token ${localStorage.getItem('Token')}`
