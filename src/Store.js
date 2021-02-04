@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import './App.css';
 import {BaseURL} from './Constants'
+import { bubble as Menu } from 'react-burger-menu'
 
 
 const Store = () => {
@@ -54,8 +55,8 @@ const Store = () => {
         window.location.reload()
     }
 
-    return (
-        <div className='container'>
+    return ( 
+        <div className='container' id="page-wrap">
             <div className='row'>
                 {
                     products.map(product => (
@@ -66,7 +67,7 @@ const Store = () => {
                                 <hr></hr>
                                 <button onClick={()=>addToCart(product.slug, id)} className="btn btn-outline-secondary add-btn">Add to Cart</button>
                                 <a className='btn btn-outline-success'>View</a>
-                                <h4 style={{display: "inline-block", float: "right"}}>{product.price}</h4>
+                                <h6 style={{display: "inline-block", float: "right"}}>{product.price}</h6>
                             </div>
                         </div>
                     ))
