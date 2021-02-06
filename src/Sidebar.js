@@ -2,45 +2,42 @@ import React, {useState, useEffect} from 'react';
 import { slide as Menu } from 'react-burger-menu';
 import './Sidebar.css'
 import axios from 'axios'
+import  { useHistory } from 'react-router-dom'
 
 
 const Sidebar = () => {
 
     const[categories, setCategories] = useState([])
+    const history = useHistory()
+
 
     useEffect(() => {
         getCategories()
+        
     }, [])
 
     const getCategories = () =>{
         axios.get('http://127.0.0.1:8000/api/food-categories/')
         .then(res=>{
             setCategories(res.data)
-            console.log(res.data)
         })
+    }
+
+    const handleId = (category) => {
+        localStorage.setItem('categoryid', category.id)
+        history.push('/filtereditem')
+        // const data = await axios.get('http://127.0.0.1:8000/api/filteritem/', {id: category.id})
+        // console.log(data)
     }
     
 
   return (
-    <Menu className='sidebar'>
-      <a className="menu-item" href="/">
-        Home
-      </a>
-      <a className="menu-item" href="/salads">
-        Indian
-      </a>
-      <a className="menu-item" href="/pizzas">
-        Italian
-      </a>
-      <a className="menu-item" href="/desserts">
-        American
-      </a>
-      <a className="menu-item" href="/desserts">
-        Chinese
-      </a>
-      <a className="menu-item" href="/desserts">
-        Sweets
-      </a>
+    <Menu id='sidebar'>
+        {
+            categories.map(category=>(
+                <a onClick={()=>handleId(category)} key={category.id} className="menu-item" href="/">{category.item_category}</a>
+            ))
+        }
     </Menu>
   );
 };

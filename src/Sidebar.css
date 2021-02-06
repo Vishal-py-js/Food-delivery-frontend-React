@@ -1,5 +1,5 @@
-.sidebar {
-    overflow: hidden;
+#sidebar {
+    position: absolute;
 }
 /* Position and sizing of burger button */
 .bm-burger-button {

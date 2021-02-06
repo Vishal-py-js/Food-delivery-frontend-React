@@ -1,5 +1,6 @@
 import './App.css';
 import Store from './Store'
+import CategorizedItem from './CategorizedItem'
 import Cart from './Cart'
 import SignUp from './SignUp'
 import Login from './Login'
@@ -19,7 +20,8 @@ function App() {
                 <Route path="/signup" exact component={SignUp} />
                 <Route path="/login" exact component={Login} />
                 <Route path="/" exact component={Store} />
-                <Route path="/cart/" exact component={Cart} />
+                <Route path="/filtereditem" exact component={CategorizedItem} />
+                <Route path="/cart" exact component={Cart} />
         </Switch>
       </Router>
       </React.Fragment>
