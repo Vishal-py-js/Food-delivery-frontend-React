@@ -5,7 +5,7 @@ import axios from 'axios'
 function CategorizedItem() {
 
     const[filtereditems, setFilteredItems] = useState([])
-    
+    const url = 'http://127.0.0.1:8000'
 
     useEffect(() => {
         
@@ -28,7 +28,7 @@ function CategorizedItem() {
                 {
                     filtereditems.map(product => (
                         <div key={product.id} className='col-lg-4'>
-                            <img className='thumbnail' src={`${product.image}`}></img>
+                            <img className='thumbnail' src={`${url}${product.image}`}></img>
                             <div className='box-element product'>
                                 <h6><strong>{product.title}</strong></h6>
                                 <hr></hr>
