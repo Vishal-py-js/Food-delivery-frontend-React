@@ -1,11 +1,12 @@
 import React, {useState, useEffect} from 'react'
 import './App.css';
 import axios from 'axios'
+import BaseURL from './Constants'
 
 function CategorizedItem() {
 
     const[filtereditems, setFilteredItems] = useState([])
-    const url = 'http://127.0.0.1:8000'
+    const url = 'http://127.0.0.1:8000' //change this manually when deploying, since it is not the same as BaseURL
 
     useEffect(() => {
         
@@ -14,7 +15,7 @@ function CategorizedItem() {
     
     const getItems = () => {
         let id = localStorage.getItem('sectionid')
-        axios.post('http://127.0.0.1:8000/api/filteritem/', {id: id})
+        axios.post(`${BaseURL}filteritem/`, {id: id})
         .then(res => {
             setFilteredItems(res.data)
             console.log(res.data)

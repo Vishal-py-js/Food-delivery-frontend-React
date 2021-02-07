@@ -3,6 +3,7 @@ import { slide as Menu } from 'react-burger-menu';
 import './Sidebar.css'
 import axios from 'axios'
 import  { useHistory } from 'react-router-dom'
+import BaseURL from './Constants'
 
 
 const Sidebar = () => {
@@ -17,7 +18,7 @@ const Sidebar = () => {
     }, [])
 
     const getCategories = () =>{
-        axios.get('http://127.0.0.1:8000/api/food-categories/')
+        axios.get(`${BaseURL}food-categories/`)
         .then(res=>{
             setCategories(res.data)
         })

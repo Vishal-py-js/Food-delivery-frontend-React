@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import './App.css';
 import {BaseURL} from './Constants'
-import { bubble as Menu } from 'react-burger-menu'
 
 
 const Store = () => {

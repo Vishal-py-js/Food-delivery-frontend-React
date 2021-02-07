@@ -3,7 +3,7 @@ import arrowup from './arrow-up.png'
 import arrowdown from './arrow-down.png'
 import axios from 'axios'
 import './App.css';
-import {BaseURL} from './Constants'
+import BaseURL from './Constants'
 
 
 function Cart() {

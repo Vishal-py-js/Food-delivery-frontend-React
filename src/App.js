@@ -6,7 +6,6 @@ import SignUp from './SignUp'
 import Login from './Login'
 import Sidebar from './Sidebar'
 import React from 'react';
-// import { slide as Menu } from 'react-burger-menu'
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 
 

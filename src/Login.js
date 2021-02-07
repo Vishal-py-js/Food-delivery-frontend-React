@@ -3,6 +3,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import "./Login.css";
 import axios from 'axios'
+import BaseURL from './Constants'
 
 
 export default function Login() {
@@ -15,7 +16,7 @@ export default function Login() {
 
   const handleSubmit = async(event) => {
     event.preventDefault();
-    await axios.post('http://127.0.0.1:8000/api/api-token-auth/',{
+    await axios.post(`${BaseURL}api-token-auth/`,{
         username: username,
         password: password
     })

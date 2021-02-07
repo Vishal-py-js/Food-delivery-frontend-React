@@ -4,6 +4,7 @@ import Button from "react-bootstrap/Button";
 import "./SignUp.css";
 import axios from 'axios'
 import  { useHistory } from 'react-router-dom'
+import BaseURL from './Constants'
 
 
 export default function SignUp() {
@@ -18,7 +19,7 @@ export default function SignUp() {
 
   const handleSubmit = async(event) => {
     event.preventDefault();
-    await axios.post('http://127.0.0.1:8000/api/register/',{
+    await axios.post(`${BaseURL}register/`,{
         username: username,
         password: password,
         password2: password2
