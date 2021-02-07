@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import './App.css';
-import {BaseURL} from './Constants'
+import BaseURL from './Constants'
 
 
 const Store = () => {
