@@ -24,7 +24,7 @@ const Sidebar = () => {
     }
 
     const handleId = (category) => {
-        localStorage.setItem('categoryid', category.id)
+        localStorage.setItem('sectionid', category.id)
         history.push('/filtereditem')
         // const data = await axios.get('http://127.0.0.1:8000/api/filteritem/', {id: category.id})
         // console.log(data)

@@ -5,21 +5,17 @@ import axios from 'axios'
 function CategorizedItem() {
 
     const[filtereditems, setFilteredItems] = useState([])
-    const[categoryId, setCategoryId] = useState()
+    
 
     useEffect(() => {
+        
         getItems()
-        getCategoryId()
-        console.log(categoryId)
     }, [])
-
-    const getCategoryId = () => {
-        setCategoryId(localStorage.getItem('categoryid'))
-    }
-
+    
     const getItems = () => {
-        axios.get('http://127.0.0.1:8000/api/filteritem/', {id: categoryId})
-        .then((res) => {
+        let id = localStorage.getItem('sectionid')
+        axios.post('http://127.0.0.1:8000/api/filteritem/', {id: id})
+        .then(res => {
             setFilteredItems(res.data)
             console.log(res.data)
         })
@@ -32,7 +28,7 @@ function CategorizedItem() {
                 {
                     filtereditems.map(product => (
                         <div key={product.id} className='col-lg-4'>
-                            <img className='thumbnail' src={product.image}></img>
+                            <img className='thumbnail' src={`${product.image}`}></img>
                             <div className='box-element product'>
                                 <h6><strong>{product.title}</strong></h6>
                                 <hr></hr>
