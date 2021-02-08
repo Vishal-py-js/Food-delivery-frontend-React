@@ -31,7 +31,6 @@ const Sidebar = () => {
 
   return (
     <Menu id='sidebar'>
-        <a href="/">Home</a>
         {
             categories.map(category=>(
                 <a onClick={()=>handleId(category)} key={category.id} className="menu-item" href="/filtereditem">{category.item_category}</a>

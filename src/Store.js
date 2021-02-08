@@ -37,9 +37,8 @@ const Store = () => {
         document.getElementById('cart-total').innerHTML = localStorage.getItem('item-count')
         let innhtml = document.getElementById('user-status')
         if (localStorage.getItem('Token')) {
-            innhtml.innerHTML = '<a href="/login" class="btn btn-warning">Logout</a>'
+            innhtml.innerHTML = `<strong>${user}</strong> <a href="/login" class="btn btn-warning">Logout</a>`
             innhtml.onclick = () => localStorage.removeItem('Token')
-            document.getElementById('user-detail').innerHTML += `<li class="nav-item active"><a class="nav-link" href="/">Welcome ${user} <span class="sr-only">(current)</span></a></li>` 
         } 
     }
 
