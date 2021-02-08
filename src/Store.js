@@ -38,6 +38,7 @@ const Store = () => {
         let innhtml = document.getElementById('user-status')
         if (localStorage.getItem('Token')) {
             innhtml.innerHTML = "Logout"
+            innhtml.onclick = () => localStorage.removeItem('Token')
             document.getElementById('user-detail').innerHTML += `<li class="nav-item active"><a class="nav-link" href="/">Welcome ${user} <span class="sr-only">(current)</span></a></li>` 
         } 
     }

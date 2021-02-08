@@ -1,5 +1,6 @@
 #sidebar {
     position: absolute;
+    text-decoration: none;
 }
 /* Position and sizing of burger button */
 .bm-burger-button {

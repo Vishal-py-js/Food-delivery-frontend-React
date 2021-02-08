@@ -2,11 +2,14 @@ import React, {useState, useEffect} from 'react'
 import './App.css';
 import axios from 'axios'
 import BaseURL from './Constants'
+import {useLocation} from 'react-router-dom'
+
 
 function CategorizedItem() {
 
     const[filtereditems, setFilteredItems] = useState([])
     const url = 'http://127.0.0.1:8000' //change this manually when deploying, since it is not the same as BaseURL
+    const location = useLocation()
 
     useEffect(() => {
         

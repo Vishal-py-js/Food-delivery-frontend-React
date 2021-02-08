@@ -25,18 +25,16 @@ const Sidebar = () => {
     }
 
     const handleId = (category) => {
-        localStorage.setItem('sectionid', category.id)
-        history.push('/filtereditem')
-        // const data = await axios.get('http://127.0.0.1:8000/api/filteritem/', {id: category.id})
-        // console.log(data)
+        localStorage.setItem('sectionid', category.id);
     }
     
 
   return (
     <Menu id='sidebar'>
+        <a href="/">Home</a>
         {
             categories.map(category=>(
-                <a onClick={()=>handleId(category)} key={category.id} className="menu-item" href="/">{category.item_category}</a>
+                <a onClick={()=>handleId(category)} key={category.id} className="menu-item" href="/filtereditem">{category.item_category}</a>
             ))
         }
     </Menu>
