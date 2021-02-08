@@ -4,11 +4,13 @@ import Button from "react-bootstrap/Button";
 import "./Login.css";
 import axios from 'axios'
 import BaseURL from './Constants'
+import {useHistory} from 'react-router-dom'
 
 
 export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const history = useHistory()
 
   function validateForm() {
     return username.length > 0 && password.length > 0;
@@ -23,9 +25,11 @@ export default function Login() {
     .then(res =>{
         console.log(res.data)
         const tokenauth = res.data.token
-        localStorage.setItem('Token', tokenauth)
-        
+        localStorage.setItem('Token', tokenauth)  
     })
+    .then(() => {
+      history.push('/')
+  })
   }
 
   return (

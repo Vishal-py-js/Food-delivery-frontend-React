@@ -23,7 +23,12 @@ function CategorizedItem() {
             setFilteredItems(res.data)
             console.log(res.data)
         })
-        
+        document.getElementById('cart-total').innerHTML = localStorage.getItem('item-count')
+        let innhtml = document.getElementById('user-status')
+        if (localStorage.getItem('Token')) {
+            innhtml.innerHTML = '<a href="/login" class="btn btn-warning">Logout</a>'
+            innhtml.onclick = () => localStorage.removeItem('Token')
+        }
     }
 
     return (
