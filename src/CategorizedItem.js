@@ -2,18 +2,18 @@ import React, {useState, useEffect} from 'react'
 import './App.css';
 import axios from 'axios'
 import BaseURL from './Constants'
-import {useLocation} from 'react-router-dom'
 
 
 function CategorizedItem() {
 
     const[filtereditems, setFilteredItems] = useState([])
+    const[userid, setUserId] = useState('')
     const url = 'http://127.0.0.1:8000' //change this manually when deploying, since it is not the same as BaseURL
-    const location = useLocation()
 
     useEffect(() => {
         
         getItems()
+        getUser()
     }, [])
     
     const getItems = () => {
@@ -31,6 +31,32 @@ function CategorizedItem() {
         }
     }
 
+    const getUser = async() => {
+        
+        const data = await axios.get(`${BaseURL}users/`,{
+            headers:{
+                'Authorization': `Token ${localStorage.getItem('Token')}`
+            }
+        })
+        console.log(data.data[0].id)
+        console.log(data.data[0].username)        
+        setUserId(data.data[0].id)
+    }
+
+    const addToCart = async(product) => {
+        await axios.post(`${BaseURL}add-to-cart/`, {
+            slug: product.slug,
+            id: userid
+        },
+        {
+            headers:{
+                'Authorization': `Token ${localStorage.getItem('Token')}`
+            }
+        }
+            )
+        window.location.reload()
+    }
+
     return (
         <div className='container' id="page-wrap">
             <div className='row'>
@@ -41,7 +67,7 @@ function CategorizedItem() {
                             <div className='box-element product'>
                                 <h6><strong>{product.title}</strong></h6>
                                 <hr></hr>
-                                <button className="btn btn-outline-secondary add-btn">Add to Cart</button>
+                                <button onClick={()=>addToCart(product)} className="btn btn-outline-secondary add-btn">Add to Cart</button>
                                 <a className='btn btn-outline-success'>View</a>
                                 <h6 style={{display: "inline-block", float: "right"}}>{product.price}</h6>
                             </div>
