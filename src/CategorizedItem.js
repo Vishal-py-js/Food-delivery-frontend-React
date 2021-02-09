@@ -8,7 +8,7 @@ function CategorizedItem() {
 
     const[filtereditems, setFilteredItems] = useState([])
     const[userid, setUserId] = useState('')
-    const url = 'http://127.0.0.1:8000' //change this manually when deploying, since it is not the same as BaseURL
+    const url = 'https://fullstackecom.herokuapp.com' //change this manually when deploying, since it is not the same as BaseURL
 
     useEffect(() => {
         
