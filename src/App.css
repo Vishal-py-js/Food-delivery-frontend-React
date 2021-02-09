@@ -1,5 +1,5 @@
 body{
-	background-color: hsl(0, 3%, 94%);
+	background-color: hsl(0, 2%, 81%);
 }
 
 h1,h2,h3,h4,h5,h6{
@@ -34,7 +34,7 @@ h1,h2,h3,h4,h5,h6{
 }
 
 .bg-dark{
-	background-color: #222a2b!important;
+	background-color: #03272c!important;
 }
 
 #cart-icon{
@@ -117,4 +117,12 @@ h1,h2,h3,h4,h5,h6{
 
 #sidebar {
   position: absolute;
+}
+
+#price {
+	display: inline block;
+	margin-top: 10px;
+	font-size: 18px;
+	font-weight: 400;
+	float: right;
 }

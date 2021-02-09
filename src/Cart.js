@@ -68,7 +68,7 @@ function Cart() {
         <div className='container'>
             <div className='row'>
                 <div className='col-lg-12'>
-                    <a className='btn btn-outline-dark' href='#'>&#x2190; Continue Ordering</a>
+                    <a className='btn btn-outline-dark' href='/'>&#x2190; Continue Ordering</a>
 
                     <br/>
                     <br/>
@@ -100,7 +100,7 @@ function Cart() {
                             <div className='cart-row' key={cartitem.item.id}>
                                 <div style={{flex: "2"}}><img className="row-image" src={cartitem.item.image}/></div>
                                 <div style={{flex: "2"}}>{cartitem.item.title}</div>
-                                <div style={{flex: "1"}}>{cartitem.item.price}</div>
+                                <div style={{flex: "1"}}>Rs {cartitem.item.price}</div>
                                 <div style={{flex: "1"}}>
                                 <p className='quantity'>{cartitem.quantity}</p>
                                     <div className='quantity'>

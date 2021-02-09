@@ -66,7 +66,7 @@ const Store = () => {
                                 <hr></hr>
                                 <button onClick={()=>addToCart(product.slug, id)} className="btn btn-outline-secondary add-btn">Add to Cart</button>
                                 <a className='btn btn-outline-success'>View</a>
-                                <h6 style={{display: "inline-block", float: "right"}}>{product.price}</h6>
+                                <h6 id='price'>Rs {product.price}</h6>
                             </div>
                         </div>
                     ))

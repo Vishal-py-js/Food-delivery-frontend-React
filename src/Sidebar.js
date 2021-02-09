@@ -1,16 +1,13 @@
 import React, {useState, useEffect} from 'react';
-import { slide as Menu } from 'react-burger-menu';
+import { stack as Menu } from 'react-burger-menu';
 import './Sidebar.css'
 import axios from 'axios'
-import  { useHistory } from 'react-router-dom'
 import BaseURL from './Constants'
 
 
 const Sidebar = () => {
 
     const[categories, setCategories] = useState([])
-    const history = useHistory()
-
 
     useEffect(() => {
         getCategories()
