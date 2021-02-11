@@ -23,7 +23,7 @@ function Cart() {
                 'Authorization': `Token ${localStorage.getItem('Token')}`
             }
         })
-        console.log(data.data)
+        // console.log(data.data)
         document.getElementById("cart-total").innerHTML = data.data.length
         localStorage.setItem('item-count', data.data.length)
         await setCart(data.data)
@@ -76,7 +76,7 @@ function Cart() {
                     <table className="table">
                         <thead>
                             <tr>
-                                <th><h5>Items: <strong></strong></h5></th>
+                                <th><h5>Items: <strong>{localStorage.getItem('item-count')}</strong></h5></th>
                                 <th><h5>Total: <strong>{total}</strong></h5></th>
                                 <a style={{float: 'right', margin: '5px'}} className="btn btn-success" href="#">Checkout</a>
                             </tr>

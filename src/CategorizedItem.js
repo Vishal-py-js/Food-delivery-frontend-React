@@ -21,7 +21,7 @@ function CategorizedItem() {
         axios.post(`${BaseURL}filteritem/`, {id: id})
         .then(res => {
             setFilteredItems(res.data)
-            console.log(res.data)
+            // console.log(res.data)
         })
         document.getElementById('cart-total').innerHTML = localStorage.getItem('item-count')
         let innhtml = document.getElementById('user-status')
@@ -38,8 +38,8 @@ function CategorizedItem() {
                 'Authorization': `Token ${localStorage.getItem('Token')}`
             }
         })
-        console.log(data.data[0].id)
-        console.log(data.data[0].username)        
+        // console.log(data.data[0].id)
+        // console.log(data.data[0].username)        
         setUserId(data.data[0].id)
     }
 

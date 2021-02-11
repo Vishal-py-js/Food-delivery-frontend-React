@@ -23,7 +23,7 @@ export default function Login() {
         password: password
     })
     .then(res =>{
-        console.log(res.data)
+        // console.log(res.data)
         const tokenauth = res.data.token
         localStorage.setItem('Token', tokenauth)  
     })

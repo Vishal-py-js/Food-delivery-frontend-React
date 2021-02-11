@@ -18,7 +18,7 @@ const Store = () => {
     const getProducts = async() => {
         
         const data = await axios.get(BaseURL)
-        console.log(data.data)
+        // console.log(data.data)
         setProducts(data.data.Item)
     }
 
@@ -29,8 +29,8 @@ const Store = () => {
                 'Authorization': `Token ${localStorage.getItem('Token')}`
             }
         })
-        console.log(data.data[0].id)
-        console.log(data.data[0].username)
+        // console.log(data.data[0].id)
+        // console.log(data.data[0].username)
         let user = data.data[0].username
         setId(data.data[0].id)
 
@@ -59,17 +59,18 @@ const Store = () => {
             <div className='row'>
                 {
                     products.map(product => (
-                        <div key={product.id} className='col-lg-4'>
+                        <div key={product.id} className='col-lg-3'>
                             <img className='thumbnail' src={product.image}></img>
                             <div className='box-element product'>
                                 <h6><strong>{product.title}</strong></h6>
                                 <hr></hr>
                                 <button onClick={()=>addToCart(product.slug, id)} className="btn btn-outline-secondary add-btn">Add to Cart</button>
-                                <a className='btn btn-outline-success'>View</a>
+                                {/* <a className='btn btn-outline-success'>View</a> */}
                                 <h6 id='price'>Rs {product.price}</h6>
                             </div>
+                            <hr/>
                         </div>
-                    ))
+                    ))   
                 }
             </div>
         </div>
