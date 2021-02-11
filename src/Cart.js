@@ -9,11 +9,10 @@ import BaseURL from './Constants'
 function Cart() {
 
     const[cart, setCart] = useState([])
-    const[total, setTotal] = useState('')
-
 
     useEffect(() => {
         getCartItems()
+        
     }, [])
 
 
@@ -33,7 +32,7 @@ function Cart() {
             innhtml.onclick = () => localStorage.removeItem('Token')
         } else {
             innhtml.innerHTML = "LogIn"
-        }  
+        }
     }
 
 
@@ -63,6 +62,10 @@ function Cart() {
         window.location.reload()
     }
 
+    let sumtotal = 0
+    cart.map((item)=>{
+        sumtotal += item.get_total
+    })
 
     return (
         <div className='container'>
@@ -77,7 +80,7 @@ function Cart() {
                         <thead>
                             <tr>
                                 <th><h5>Items: <strong>{localStorage.getItem('item-count')}</strong></h5></th>
-                                <th><h5>Total: <strong>{total}</strong></h5></th>
+                                <th><h5>Total: <strong>{sumtotal}</strong></h5></th>
                                 <a style={{float: 'right', margin: '5px'}} className="btn btn-success" href="#">Checkout</a>
                             </tr>
                         </thead>
