@@ -65,7 +65,7 @@
   /* Individual item */
 .bm-item {
     display: inline-block;
-  
+    font-weight: 700;
     color: #d1d1d1;
     margin-bottom: 10px;
     text-align: left;
