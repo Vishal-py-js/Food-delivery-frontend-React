@@ -63,7 +63,7 @@ function CategorizedItem() {
                 {
                     filtereditems.map(product => (
                         <div key={product.id} className='col-lg-4'>
-                            <img className='thumbnail' src={`${url}${product.image}`}></img>
+                            <img className='thumbnail' src={product.image}></img>
                             <div className='box-element product'>
                                 <h6><strong>{product.title}</strong></h6>
                                 <hr></hr>
