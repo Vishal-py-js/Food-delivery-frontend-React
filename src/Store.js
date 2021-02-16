@@ -16,14 +16,12 @@ const Store = () => {
     }, [])
 
     const getProducts = async() => {
-        
         const data = await axios.get(BaseURL)
         // console.log(data.data)
         setProducts(data.data.Item)
     }
 
     const getUser = async() => {
-        
         const data = await axios.get(`${BaseURL}users/`,{
             headers:{
                 'Authorization': `Token ${localStorage.getItem('Token')}`

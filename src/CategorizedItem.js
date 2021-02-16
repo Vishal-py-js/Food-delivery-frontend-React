@@ -7,6 +7,7 @@ import BaseURL from './Constants'
 function CategorizedItem() {
 
     const[filtereditems, setFilteredItems] = useState([])
+    const[length, setLength] = useState('')
     const[userid, setUserId] = useState('')
 
     useEffect(() => {
@@ -20,7 +21,8 @@ function CategorizedItem() {
         axios.post(`${BaseURL}filteritem/`, {id: id})
         .then(res => {
             setFilteredItems(res.data)
-            // console.log(res.data)
+            setLength(res.data.length)
+            console.log(res.data.length)
         })
         document.getElementById('cart-total').innerHTML = localStorage.getItem('item-count')
         let innhtml = document.getElementById('user-status')
@@ -58,6 +60,7 @@ function CategorizedItem() {
 
     return (
         <div className='container' id="page-wrap">
+            <h5>Found {length} items</h5>
             <div className='row'>
                 {
                     filtereditems.map(product => (

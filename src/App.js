@@ -13,7 +13,7 @@ import BaseURL from './Constants';
 
 function App() {
 
-  //below function calls the API endpoint every 50 minutes to prevent the free dynos from going to sleep on heroku.
+  //below function calls the API endpoint every 50 minutes to prevent the free dyno from going to sleep on heroku.
   setInterval(() => {
     axios.get(BaseURL)
   }, 3000000);
