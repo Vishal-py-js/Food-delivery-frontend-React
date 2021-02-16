@@ -22,7 +22,7 @@ function CategorizedItem() {
         .then(res => {
             setFilteredItems(res.data)
             setLength(res.data.length)
-            console.log(res.data.length)
+            // console.log(res.data.length)
         })
         document.getElementById('cart-total').innerHTML = localStorage.getItem('item-count')
         let innhtml = document.getElementById('user-status')
