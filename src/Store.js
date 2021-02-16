@@ -2,16 +2,21 @@ import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import './App.css';
 import BaseURL from './Constants'
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import Loader from "react-loader-spinner"
 
 
 const Store = () => {
 
     const[products, setProducts] = useState([])
     const[id, setId] = useState('')
-    
+    const[loading, setLoading] = useState(true)
     
     useEffect(() => {
         getProducts()
+        .then(()=>{
+            setLoading(false)
+        })
         getUser()
     }, [])
 
@@ -69,6 +74,13 @@ const Store = () => {
                             <hr/>
                         </div>
                     ))   
+                }
+                {
+                    loading?<div>
+                        <Loader type="Hearts" color="#00BFFF" height={100} width={100} timeout={6000} 
+                        />
+                        <p>The backend is hosted on heroku with free dynos which goes to sleep after 30 minutes of inactivity. It might take a while to completely load this page, Please hang in there.</p>
+                            </div>:''
                 }
             </div>
         </div>
