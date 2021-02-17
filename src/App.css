@@ -130,3 +130,8 @@ h6 {
   font-weight: 500;
   float: right;
 }
+
+#loader {
+  text-align: center;
+  margin-top: 150px;
+}

@@ -76,8 +76,8 @@ const Store = () => {
                     ))   
                 }
                 {
-                    loading?<div>
-                        <Loader type="Hearts" color="#00BFFF" height={100} width={100} timeout={6000} 
+                    loading?<div id='loader'>
+                        <Loader type="Bars" color="#00BFFF" height={100} width={100} timeout={6000} 
                         />
                         <p>The backend is hosted on heroku with free dynos which goes to sleep after 30 minutes of inactivity. It might take a while to completely load this page, Please hang in there.</p>
                             </div>:''
