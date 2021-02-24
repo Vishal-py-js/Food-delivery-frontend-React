@@ -5,6 +5,7 @@ import Cart from './Cart'
 import SignUp from './SignUp'
 import Login from './Login'
 import Sidebar from './Sidebar'
+import Checkout from './Checkout'
 import React from 'react';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 import axios from 'axios';
@@ -12,7 +13,6 @@ import BaseURL from './Constants';
 
 
 function App() {
-
 
   //below function calls the API endpoint every 50 minutes to prevent the free dyno from going to sleep on heroku.
   setInterval(() => {
@@ -29,6 +29,7 @@ function App() {
                 <Route path="/" exact component={Store} />
                 <Route path="/filtereditem" exact component={CategorizedItem} />
                 <Route path="/cart" exact component={Cart} />
+                <Route path="/checkout" exact component={Checkout} />
         </Switch>
       </Router>
       </React.Fragment>
