@@ -53,7 +53,22 @@ function Checkout() {
                 </div>
             </div>
             
-            
+            <div className='row'>
+                <div className='col-lg-12'>
+                    <div className='box-element'>
+                        <a className='btn btn-outline-dark'>Back to Cart</a>
+                        <hr />
+                        <h3>Order Summary</h3>
+                        <hr/>
+                        <div className="cart-row">
+                            <div style={{"flex":"2"}}><img className="row-image"/></div>
+                            <div style={{"flex":"2"}}><p>item 1</p></div>
+                            <div style={{"flex":"1"}}><p>item 2</p></div>
+                            <div style={{"flex":"1"}}><p>item 3</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }
