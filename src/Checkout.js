@@ -1,11 +1,14 @@
+import axios from 'axios'
 import React, {useState, useEffect} from 'react'
 import {connect} from 'react-redux'
 import './App.css'
+import BaseURL from './Constants'
 import {fetchitems} from './redux/Action'
 
 function Checkout({itemData, fetchitems}) {
 
     useEffect(() => {
+        getAddresses()
         fetchitems()
         let innhtml = document.getElementById('user-status')
         // document.getElementById('cart-icon').src = './cart.png'
@@ -22,11 +25,34 @@ function Checkout({itemData, fetchitems}) {
     }, [])
 
     // const[address, setAddress] = useState({
-    //     address: '',
+    //     // name: '',
+    //     // email: '',
+    //     addressline: '',
     //     city: '',
     //     state: '',
-    //     zipcode: ''
+    //     zipcode: '',
+    //     user: 1
     // })
+
+    const[addressline, setAddressline] = useState('')
+    const[city, setCity] = useState('')
+    const[state, setState] = useState('')
+    const[zipcode, setZipcode] = useState('')
+    const[country, setCountry] = useState('')
+    
+    const[prevAddress, setPrevAddress] = useState([])
+
+    const getAddresses = () => {
+        axios.get(`${BaseURL}address/`, {
+            headers: {
+                'Authorization': `Token ${localStorage.getItem('Token')}`
+            }
+        })
+        .then(response => 
+            setPrevAddress(response.data)
+            
+        )
+    }
 
     // document.getElementById("cart-total").innerHTML = data.data.length
     // localStorage.setItem('item-count', data.data.length)
@@ -34,6 +60,24 @@ function Checkout({itemData, fetchitems}) {
     itemData.map((item)=>{
         sumtotal += item.get_total
     })
+
+    const submit = () => {
+        axios.post(`${BaseURL}address`, {
+            
+            headers:{
+                Authorization: `Token ${localStorage.getItem('Token')}`
+            },
+            data: {
+                "address": addressline,
+                "city": city,
+                "state": state,
+                "zipcode": zipcode,
+                "country": country,
+                "user": 1
+            }
+        })
+
+    }
 
 
     return (
@@ -96,26 +140,41 @@ function Checkout({itemData, fetchitems}) {
                                 <p>Shipping Information:</p>
                                 <hr/>
                                 <div className='form-field'>
-                                    <input type='text' name='address' placeholder='Address..' />
+                                    <input onChange={e=>setAddressline(e.target.value)} type='text' name='address' placeholder='Address..' />
                                 </div>
                                 <div className='form-field'>
-                                    <input type='text' name='city' placeholder='City..' />
+                                    <input onChange={e => setCity(e.target.value)} type='text' name='city' placeholder='City..' />
                                 </div>
                                 <div className='form-field'>
-                                    <input type='text' name='state' placeholder='State..' />
+                                    <input onChange={e => setState(e.target.value)} type='text' name='state' placeholder='State..' />
                                 </div>
                                 <div className='form-field'>
-                                    <input type='text' name='zipcode' placeholder='Zipcode..' />
+                                    <input  onChange={e => setZipcode(e.target.value)} type='text' name='zipcode' placeholder='Zipcode..' />
                                 </div>
                                 <div className='form-field'>
-                                    <input type='text' name='country' placeholder='Country..' />
+                                    <input onChange={e => setCountry(e.target.value)} type='text' name='country' placeholder='Country..' />
                                 </div>
                             </div>
                             <hr/>
-                            <input className='btn btn-success btn-block' type='submit' value='Continue' />
+                            <input onClick={()=>submit()} className='btn btn-success btn-block' type='submit' value='Continue' />
                         </form>
                     </div>
                 </div>
+            </div>
+            <div className='row'>
+                {
+                    prevAddress.map(addressitem => (
+                        <div key={addressitem.id} className='col-lg-4'>
+                            <div className='box-element product'>
+                                <h5>{addressitem.address}</h5>
+                                <h5>{addressitem.city}</h5>
+                                <h5>{addressitem.state}</h5>
+                                <h5>{addressitem.zipcode}</h5>
+                                <h5>{addressitem.country}</h5>
+                            </div>
+                        </div>
+                    ))
+                }
             </div>
         </div>
      )
