@@ -9,7 +9,9 @@ function Checkout({itemData, fetchitems}) {
         fetchitems()
         let innhtml = document.getElementById('user-status')
         // document.getElementById('cart-icon').src = './cart.png'
-        document.getElementById("cart-total").innerHTML = localStorage.getItem('item-count')
+        document.getElementById('home').innerHTML = ''
+        document.getElementById('cartt').innerHTML = ''
+        document.getElementById("cart-total").innerHTML = ''
         if (localStorage.getItem('Token')) {
             innhtml.innerHTML = '<a href="/login" class="btn btn-warning">Logout</a>'
             innhtml.onclick = () => localStorage.removeItem('Token')
@@ -28,7 +30,10 @@ function Checkout({itemData, fetchitems}) {
 
     // document.getElementById("cart-total").innerHTML = data.data.length
     // localStorage.setItem('item-count', data.data.length)
-    
+    let sumtotal = 0
+    itemData.map((item)=>{
+        sumtotal += item.get_total
+    })
 
 
     return (
@@ -40,7 +45,10 @@ function Checkout({itemData, fetchitems}) {
                     <div className='box-element'>
                         <a className='btn btn-outline-dark' href="/cart/">Back to Cart</a>
                         <hr />
-                        <h4>Order Summary</h4>
+                        <div className='order-summary'>
+                            <h4>Order Summary</h4>
+                            <h4 style={{'float': 'right','marginLeft':'500px'}}>Total : {sumtotal}</h4>
+                        </div>
                         <hr/>
                         <div className='cart-box-element'>
                         <div className="cart-row">
