@@ -69,22 +69,40 @@ function Checkout({itemData, fetchitems}) {
                         <hr />
                         <h3>Order Summary</h3>
                         <hr/>
+                        <div className='cart-box-element'>
                         <div className="cart-row">
-                            <div style={{"flex":"2"}}><img className="row-image"/></div>
-                            <div style={{"flex":"2"}}><p>item 1</p></div>
-                            <div style={{"flex":"1"}}><p>item 2</p></div>
-                            <div style={{"flex":"1"}}><p>item 3</p></div>
+                        <div style={{flex: 2}}></div>
+                            <div style={{"flex":"2"}}><p>Item</p></div>
+                            <div style={{"flex":"1"}}><p>Price</p></div>
+                            <div style={{"flex":"1"}}><p>Quantity</p></div>
+                            <div style={{"flex":"1"}}><p>Total</p></div>
+                        </div>
+                        {
+                            itemData.map(item => (
+                                <div className='cart-row' key={item.item.id}>
+                                <div style={{flex: "2"}}><img className="row-image" src={item.item.image}/></div>
+                                <div style={{flex: "2"}}>{item.item.title}</div>
+                                <div style={{flex: "1"}}>Rs {item.item.price}</div>
+                                <div style={{flex: "1"}}>
+                                <p className='quantity'>{item.quantity}</p>
+                                    
+                                </div>
+                                <div style={{flex: "1"}}>{item.quantity * item.item.price}</div>
+                                <h3></h3>
+                            </div>
+                            ))
+                        }
                         </div>
                     </div>
                 </div>
             </div>
-            <div>
-                {/* {
+            {/* <div>
+                {
                     itemData.map(item =>(
                         <h1 key={item.id}>{item.item.price}</h1>
                     ))
-                } */}
-            </div>
+                }
+            </div> */}
         </div>
      )
 }
