@@ -1,14 +1,23 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
+import {connect} from 'react-redux'
 import './App.css'
+import {fetchitems} from './redux/Action'
 
-function Checkout() {
+function Checkout({itemData, fetchitems}) {
 
-    const[address, setAddress] = useState({
-        address: '',
-        city: '',
-        state: '',
-        zipcode: ''
-    })
+    useEffect(() => {
+        fetchitems()
+        
+    }, [])
+
+    console.log(itemData)
+    // const[address, setAddress] = useState({
+    //     address: '',
+    //     city: '',
+    //     state: '',
+    //     zipcode: ''
+    // })
+
 
     return (
         <div className='container'>
@@ -69,8 +78,27 @@ function Checkout() {
                     </div>
                 </div>
             </div>
+            <div>
+                {/* {
+                    itemData.map(item =>(
+                        <h1 key={item.id}>{item.item.price}</h1>
+                    ))
+                } */}
+            </div>
         </div>
-    )
+     )
 }
 
-export default Checkout
+const mapStateToProps = state => {
+    return {
+        itemData: state.items
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        fetchitems: () => dispatch(fetchitems())
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Checkout)
