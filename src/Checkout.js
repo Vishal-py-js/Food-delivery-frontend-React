@@ -7,10 +7,18 @@ function Checkout({itemData, fetchitems}) {
 
     useEffect(() => {
         fetchitems()
+        let innhtml = document.getElementById('user-status')
+        // document.getElementById('cart-icon').src = './cart.png'
+        document.getElementById("cart-total").innerHTML = localStorage.getItem('item-count')
+        if (localStorage.getItem('Token')) {
+            innhtml.innerHTML = '<a href="/login" class="btn btn-warning">Logout</a>'
+            innhtml.onclick = () => localStorage.removeItem('Token')
+        } else {
+            innhtml.innerHTML = "LogIn"
+        }
         
     }, [])
 
-    console.log(itemData)
     // const[address, setAddress] = useState({
     //     address: '',
     //     city: '',
@@ -18,10 +26,50 @@ function Checkout({itemData, fetchitems}) {
     //     zipcode: ''
     // })
 
+    // document.getElementById("cart-total").innerHTML = data.data.length
+    // localStorage.setItem('item-count', data.data.length)
+    
+
 
     return (
         <div className='container'>
             <br />
+            
+            <div className='row'>
+                <div className='col-lg-12'>
+                    <div className='box-element'>
+                        <a className='btn btn-outline-dark' href="/cart/">Back to Cart</a>
+                        <hr />
+                        <h4>Order Summary</h4>
+                        <hr/>
+                        <div className='cart-box-element'>
+                        <div className="cart-row">
+                        <div style={{flex: 2}}></div>
+                            <div style={{"flex":"2"}}><p>Item</p></div>
+                            <div style={{"flex":"1"}}><p>Price</p></div>
+                            <div style={{"flex":"1"}}><p>Quantity</p></div>
+                            <div style={{"flex":"1"}}><p>Total</p></div>
+                        </div>
+                        {
+                            itemData.map(item => (
+                                <div className='cart-row' key={item.item.id}>
+                                <div style={{flex: "2"}}><img className="row-image" src={item.item.image}/></div>
+                                <div style={{flex: "2"}}>{item.item.title}</div>
+                                <div style={{flex: "1"}}>Rs {item.item.price}</div>
+                                <div style={{flex: "1"}}>
+                                <p className='quantity'>{item.quantity}</p>
+                                    
+                                </div>
+                                <div style={{flex: "1"}}>{item.quantity * item.item.price}</div>
+                                <h3></h3>
+                            </div>
+                            ))
+                        }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div className='row'>
                 <div className='col-lg-12'>
                     <div className='box-element' id='form-wrapper'>
@@ -61,48 +109,6 @@ function Checkout({itemData, fetchitems}) {
                     </div>
                 </div>
             </div>
-            
-            <div className='row'>
-                <div className='col-lg-12'>
-                    <div className='box-element'>
-                        <a className='btn btn-outline-dark'>Back to Cart</a>
-                        <hr />
-                        <h3>Order Summary</h3>
-                        <hr/>
-                        <div className='cart-box-element'>
-                        <div className="cart-row">
-                        <div style={{flex: 2}}></div>
-                            <div style={{"flex":"2"}}><p>Item</p></div>
-                            <div style={{"flex":"1"}}><p>Price</p></div>
-                            <div style={{"flex":"1"}}><p>Quantity</p></div>
-                            <div style={{"flex":"1"}}><p>Total</p></div>
-                        </div>
-                        {
-                            itemData.map(item => (
-                                <div className='cart-row' key={item.item.id}>
-                                <div style={{flex: "2"}}><img className="row-image" src={item.item.image}/></div>
-                                <div style={{flex: "2"}}>{item.item.title}</div>
-                                <div style={{flex: "1"}}>Rs {item.item.price}</div>
-                                <div style={{flex: "1"}}>
-                                <p className='quantity'>{item.quantity}</p>
-                                    
-                                </div>
-                                <div style={{flex: "1"}}>{item.quantity * item.item.price}</div>
-                                <h3></h3>
-                            </div>
-                            ))
-                        }
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {/* <div>
-                {
-                    itemData.map(item =>(
-                        <h1 key={item.id}>{item.item.price}</h1>
-                    ))
-                }
-            </div> */}
         </div>
      )
 }
@@ -120,3 +126,4 @@ const mapDispatchToProps = dispatch => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Checkout)
+// export default Checkout

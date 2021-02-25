@@ -81,7 +81,7 @@ function Cart() {
                             <tr>
                                 <th><h5>Items: <strong>{localStorage.getItem('item-count')}</strong></h5></th>
                                 <th><h5>Total: <strong>Rs {sumtotal}</strong></h5></th>
-                                <a style={{float: 'right', margin: '5px'}} className="btn btn-success" href="#">Checkout</a>
+                                <a style={{float: 'right', margin: '5px'}} className="btn btn-success" href="/checkout/">Checkout</a>
                             </tr>
                         </thead>
                     </table>
