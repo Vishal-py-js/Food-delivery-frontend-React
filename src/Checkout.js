@@ -1,11 +1,20 @@
 import axios from 'axios'
 import React, {useState, useEffect} from 'react'
+import { unstable_renderSubtreeIntoContainer } from 'react-dom'
 import {connect} from 'react-redux'
 import './App.css'
 import BaseURL from './Constants'
 import {fetchitems} from './redux/Action'
 
 function Checkout({itemData, fetchitems}) {
+
+    const[myaddress, setMyAddress] = useState({
+        address: '',
+        city: '',
+        state: '',
+        zipcode: '',
+        user: localStorage.getItem('user-id')
+    })
 
     useEffect(() => {
         getAddresses()
@@ -23,22 +32,6 @@ function Checkout({itemData, fetchitems}) {
         }
         
     }, [])
-
-    // const[address, setAddress] = useState({
-    //     // name: '',
-    //     // email: '',
-    //     addressline: '',
-    //     city: '',
-    //     state: '',
-    //     zipcode: '',
-    //     user: 1
-    // })
-
-    const[addressline, setAddressline] = useState('')
-    const[city, setCity] = useState('')
-    const[state, setState] = useState('')
-    const[zipcode, setZipcode] = useState('')
-    const[country, setCountry] = useState('')
     
     const[prevAddress, setPrevAddress] = useState([])
 
@@ -49,8 +42,7 @@ function Checkout({itemData, fetchitems}) {
             }
         })
         .then(response => 
-            setPrevAddress(response.data)
-            
+            setPrevAddress(response.data) 
         )
     }
 
@@ -61,29 +53,18 @@ function Checkout({itemData, fetchitems}) {
         sumtotal += item.get_total
     })
 
-    const submit = () => {
-        axios.post(`${BaseURL}address`, {
-            
-            headers:{
-                Authorization: `Token ${localStorage.getItem('Token')}`
-            },
-            data: {
-                "address": addressline,
-                "city": city,
-                "state": state,
-                "zipcode": zipcode,
-                "country": country,
-                "user": 1
+    const submit = async() => {
+        await axios.post(`${BaseURL}address/`, myaddress, {
+            headers: {
+                'Authorization': `Token ${localStorage.getItem('Token')}`
             }
         })
-
     }
 
 
     return (
         <div className='container'>
             <br />
-            
             <div className='row'>
                 <div className='col-lg-12'>
                     <div className='box-element'>
@@ -125,7 +106,7 @@ function Checkout({itemData, fetchitems}) {
             <div className='row'>
                 <div className='col-lg-12'>
                     <div className='box-element' id='form-wrapper'>
-                        <form id='form'>
+                        <form onSubmit={submit} id='form'>
                             <div id='user-info'>
                                 <div className='form-field'>
                                     <input type='text' name='name' placeholder='Name..'/>
@@ -140,23 +121,20 @@ function Checkout({itemData, fetchitems}) {
                                 <p>Shipping Information:</p>
                                 <hr/>
                                 <div className='form-field'>
-                                    <input onChange={e=>setAddressline(e.target.value)} type='text' name='address' placeholder='Address..' />
+                                    <input onChange={e=> setMyAddress({...myaddress, address:e.target.value})} type='text' name='address' value={myaddress.address} placeholder='Address..' />
                                 </div>
                                 <div className='form-field'>
-                                    <input onChange={e => setCity(e.target.value)} type='text' name='city' placeholder='City..' />
+                                    <input onChange={e => setMyAddress({...myaddress, city:e.target.value})} type='text' name='city' value={myaddress.city} placeholder='City..' />
                                 </div>
                                 <div className='form-field'>
-                                    <input onChange={e => setState(e.target.value)} type='text' name='state' placeholder='State..' />
+                                    <input onChange={e => setMyAddress({...myaddress, state:e.target.value})} type='text' name='state' value={myaddress.state} placeholder='State..' />
                                 </div>
                                 <div className='form-field'>
-                                    <input  onChange={e => setZipcode(e.target.value)} type='text' name='zipcode' placeholder='Zipcode..' />
-                                </div>
-                                <div className='form-field'>
-                                    <input onChange={e => setCountry(e.target.value)} type='text' name='country' placeholder='Country..' />
+                                    <input onChange={e => setMyAddress({...myaddress, zipcode:e.target.value})} type='text' name='zipcode' value={myaddress.zipcode} placeholder='Zipcode..' />
                                 </div>
                             </div>
                             <hr/>
-                            <input onClick={()=>submit()} className='btn btn-success btn-block' type='submit' value='Continue' />
+                            <input className='btn btn-success btn-block' type='submit' value='Continue' />
                         </form>
                     </div>
                 </div>

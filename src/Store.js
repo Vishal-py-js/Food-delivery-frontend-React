@@ -36,6 +36,7 @@ const Store = () => {
         // console.log(data.data[0].username)
         let user = data.data[0].username
         setId(data.data[0].id)
+        localStorage.setItem('user-id', data.data[0].id)
 
         document.getElementById('cart-total').innerHTML = localStorage.getItem('item-count')
         let innhtml = document.getElementById('user-status')
