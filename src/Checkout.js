@@ -144,12 +144,12 @@ function Checkout({itemData, fetchitems}) {
                     prevAddress.map(addressitem => (
                         <div key={addressitem.id} className='col-lg-4'>
                             <div className='box-element product'>
-                                <h5>{addressitem.address}</h5>
-                                <h5>{addressitem.city}</h5>
-                                <h5>{addressitem.state}</h5>
-                                <h5>{addressitem.zipcode}</h5>
-                                <h5>{addressitem.country}</h5>
+                                <h6> Address line: {addressitem.address}</h6>
+                                <h6>city: {addressitem.city}</h6>
+                                <h6>State: {addressitem.state}</h6>
+                                <h6>Zipcode: {addressitem.zipcode}</h6>
                             </div>
+                            <br/>
                         </div>
                     ))
                 }
