@@ -78,10 +78,10 @@ function Checkout({itemData, fetchitems}) {
                         <div className='cart-box-element'>
                         <div className="cart-row">
                         <div style={{flex: 2}}></div>
-                            <div style={{"flex":"2"}}><p>Item</p></div>
-                            <div style={{"flex":"1"}}><p>Price</p></div>
-                            <div style={{"flex":"1"}}><p>Quantity</p></div>
-                            <div style={{"flex":"1"}}><p>Total</p></div>
+                            <div style={{"flex":"2"}}><strong>Item</strong></div>
+                            <div style={{"flex":"1"}}><strong>Price</strong></div>
+                            <div style={{"flex":"1"}}><strong>Quantity</strong></div>
+                            <div style={{"flex":"1"}}><strong>Total</strong></div>
                         </div>
                         {
                             itemData.map(item => (
