@@ -1,6 +1,5 @@
 import axios from 'axios'
 import React, {useState, useEffect} from 'react'
-import { unstable_renderSubtreeIntoContainer } from 'react-dom'
 import {connect} from 'react-redux'
 import './App.css'
 import BaseURL from './Constants'
