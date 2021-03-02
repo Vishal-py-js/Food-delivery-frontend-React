@@ -3,6 +3,7 @@ import { stack as Menu } from 'react-burger-menu';
 import './Sidebar.css'
 import axios from 'axios'
 import BaseURL from './Constants'
+import HomeIcon from '@material-ui/icons/Home';
 
 
 const Sidebar = () => {
@@ -28,6 +29,8 @@ const Sidebar = () => {
 
   return (
     <Menu id='sidebar'>
+        <a id='home-icon' href="/"><HomeIcon style={{ fontSize: 30 }} /></a>
+        <hr color='black' />
         {
             categories.map(category=>(
                 <a onClick={()=>handleId(category)} key={category.id} className="menu-item" href="/filtereditem">{category.item_category}</a>

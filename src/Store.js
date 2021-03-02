@@ -38,6 +38,7 @@ const Store = () => {
         setId(data.data[0].id)
         localStorage.setItem('user-id', data.data[0].id)
 
+
         document.getElementById('cart-total').innerHTML = localStorage.getItem('item-count')
         let innhtml = document.getElementById('user-status')
         if (localStorage.getItem('Token')) {

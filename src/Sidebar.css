@@ -84,3 +84,7 @@
   .bm-overlay {
     background: rgba(0, 0, 0, 0.3);
   }
+
+#home-icon {
+  text-align: center;
+}
